@@ -14,26 +14,29 @@ import com.cooksys.service.LocationService;
 
 @RestController
 @RequestMapping("location")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class LocationController {
 	
-	@Autowired
-	private LocationService locationService;
+	private LocationService service;
 
+	@Autowired
+	public LocationController(LocationService service){
+		this.service = service;
+	}
+	
 	@RequestMapping
-	public List<Location> get() {
-		return locationService.getAll();
+	public List<Location> index(){
+		return this.service.index();
 	}
 
 	@RequestMapping("/{id}")
-	public Location get(@PathVariable("id") long id) {
-		return locationService.get(id);
+	public Location read(@PathVariable long id){
+		return this.service.read(id);
 	}
 	
 	@RequestMapping("/name")
-	public Location get(@RequestParam("name") String cityName)
-	{
-		return locationService.get(cityName);
+	public Location read(@RequestParam("name") String cityName){
+		return this.service.read(cityName);
 	}
 
 }

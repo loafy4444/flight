@@ -3,7 +3,9 @@ package com.cooksys.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -11,7 +13,8 @@ import javax.persistence.Table;
 public class Location {
 
 	@Id
-	@GeneratedValue
+    @SequenceGenerator(name="location_id_seq", sequenceName="location_id_seq", allocationSize=1)
+    @GeneratedValue(strategy=GenerationType.IDENTITY, generator="location_id_seq")
 	private long id;
 
 	@Column(name = "longitude")
@@ -25,6 +28,14 @@ public class Location {
 
 	public Location() {
 
+	}
+	
+	public Location(long id, String longitude, String latitude, String city) {
+		super();
+		this.id = id;
+		this.longitude = longitude;
+		this.latitude = latitude;
+		this.city = city;
 	}
 
 	public long getId() {
@@ -58,14 +69,4 @@ public class Location {
 	public void setCity(String city) {
 		this.city = city;
 	}
-
-	public Location(long id, String longitude, String latitude, String city) {
-		super();
-		this.id = id;
-		this.longitude = longitude;
-		this.latitude = latitude;
-		this.city = city;
-	}
-
-	
 }

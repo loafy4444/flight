@@ -4,7 +4,7 @@ The intent of this project is to create an interface for users to book flights.
 
 The idea of a flight is greatly simplified from reality.
 
-In this world, the flights will only go to four cities: Orlando, Miami, Tallahassee, and Jacksonville
+In this world, the flights will only go to four cities: Memphis, Knoxville, Nashville, and Chattanooga
 
 A new set of five flights is generated every "day"
 
@@ -12,7 +12,8 @@ A day is defined in the FlightService
 
 A day lasts as long as the @Scheduled annotation indicates, feel free to change this value to assist in your testing
 
-A flight has a origin, destination, flight time, and offset
+A flight has a origin, destination, flight time, and offset 
+(hours since the time of opening  i.e. open from 8-5 with a flight at 12 the offset would be 4.)
 
 The origin is the city the flight departs from
 
@@ -21,15 +22,13 @@ The destination is the city the flight lands in
 The flight time is the number of hours the flight spends in the air
 
 The offset is the number of hours the flight waits from the beginning of the day until the flight departs
+(hours since the time of opening  i.e. open from 8-5 with a flight at 12 the offset would be 4.)
 
 
 [SET UP]
-Create a schema named "ftd_flight" through mysql workbench
-
 Run the project to generate tables
 
-Execute the contents of location.sql to populate the locations table
-
+Navigate to the resources folder and change the name of "--data.sql" to "data.sql". Rerun the project
 
 [PROJECT REQUIREMENTS]
 
@@ -43,7 +42,7 @@ If a user logs in, allow them to search for flights between an origin and destin
 
 The results of this search must be updated in real time
 
-The app must find a flight or series of flights (in the case of layovers) that will get the user from the origin to the destination the fastest
+The app must find a flight or series of flights (in the case of layovers) that will get the user from the origin to the destination the fastest (i.e. sort based on flight time)
 
 A layover of zero is not valid
 
@@ -58,4 +57,18 @@ The user must be given the option to view their booked itinerary on a map as pro
 In the scenario of a multi-flight itinerary, lines must be displayed with a different color for each branch of the journey
 
 Information must be provided on the map template page that shows the user the order the line segments occur in, the flight time for that segment, and the layover time in each particular city
+
+
+
+Once a day export a zip to google docs and email Michael
+bricks_mon.zip
+
+Java FlightService
+	@Scheduled time should be changed to a higher number after testing to ensure a more normal experience
+	Current time of 5000 ms (5 seconds) itereates fairly quickly to allow for easier testing.
+	Every 5 seconds the schedule generates new flights
+
+Angular $timer?
+
+
 

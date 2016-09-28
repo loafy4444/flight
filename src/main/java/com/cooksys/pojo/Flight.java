@@ -14,6 +14,14 @@ public class Flight {
 	//How many hours after the start of the day until the flight takes off
 	private long offset;
 	
+	public Flight(String origin, String destination, long flightTime, long offset) {
+		super();
+		this.origin = origin;
+		this.destination = destination;
+		this.flightTime = flightTime;
+		this.offset = offset;
+	}
+	
 	public String getOrigin() {
 		return origin;
 	}
@@ -38,14 +46,4 @@ public class Flight {
 	public void setOffset(long offset) {
 		this.offset = offset;
 	}
-	public Flight(String origin, String destination, long flightTime, long offset) {
-		super();
-		this.origin = origin;
-		this.destination = destination;
-		this.flightTime = flightTime;
-		this.offset = offset;
-	}
-	
-	
-
 }

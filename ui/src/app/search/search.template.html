@@ -1,0 +1,50 @@
+<div class="container" ng-cloak layout-gt-sm="row" layout="column">
+  <div flex-gt-sm="100" flex>
+  <md-toolbar layout="row">
+    <div class="md-toolbar-tools" ng-show="ctrl.results !== null">
+      <span>Where Would You like to Fly Today?</span>
+    </div>
+    <div class="md-toolbar-tools" ng-show="ctrl.results === null">
+      <span>Your Flight was Booked Successfully.</span>
+    </div>
+  </md-toolbar>
+
+  <form ng-submit="ctrl.search()">
+    <div layout="column", layout-align="center center">
+      <div class="searchBox", layout="column">
+        <md-content class="md-padding", layout="column">
+          <md-input-container>
+            <md-select ng-model="ctrl.formData.origin" placeholder="Flight Origin" >
+              <md-option value="Memphis">Memphis</md-option>
+              <md-option value="NASHVILLE">NASHVILLE</md-option>
+              <md-option value="CHATTANOOGA">CHATTANOOGA</md-option>
+              <md-option value="KNOXVILLE">KNOXVILLE</md-option>
+          </md-input-container>
+          <md-input-container>
+            <md-select ng-model="ctrl.formData.destination" placeholder="Flight Destination" >
+              <md-option value="Memphis">Memphis</md-option>
+              <md-option value="NASHVILLE">NASHVILLE</md-option>
+              <md-option value="CHATTANOOGA">CHATTANOOGA</md-option>
+              <md-option value="KNOXVILLE">KNOXVILLE</md-option>
+          </md-input-container>
+          <div class="md-padding" layout="row" layout-align="center center">
+            <md-button class="head-button" type="submit">Search Flights</md-button>
+            <div flex></div>
+          </div>
+      </div>
+    </div>
+  </form>
+
+
+    <md-list-item class="md-2-line" ng-repeat="flight in ctrl.results"ng-click="null">
+      <div class="md-list-item-text" layout="column">
+      <!-- <div class="md-list-item-text" ng-repeat="flight in flights" layout="column"> -->
+      <h3>Flight Origin: {{ flight.origin }}</h3>
+      <h3>Flight Destination: {{ flight.destination }}</h3>
+      <p>Flight Takeoff Time: {{ flight.offset }}</p>
+      <p>Flight Duration: {{ flight.flightTime }} hours</p>
+      </div>
+      <div flex></div><md-button class="head-button" ng-click="ctrl.select(flight)">Select Flight</md-button>
+    </md-list-item>
+
+</div>

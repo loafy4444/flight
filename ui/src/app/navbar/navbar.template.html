@@ -1,0 +1,13 @@
+      <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+        <!-- <md-button class="head-button" ui-sref="index">Home</md-button> -->
+        <md-button class="head-button" ng-click="ctrl.appService.logout()"
+            ng-show="ctrl.appService.validCust === true">Logout</md-button>
+        <md-button class="head-button" ui-sref="login"
+            ng-show="ctrl.appService.validCust === false">Login</md-button>
+        <!-- <md-button class="head-button" ui-sref="map">Map</md-button> -->
+        <md-button class="head-button" ui-sref="flights">Flights</md-button>
+        <md-button class="head-button" ui-sref="search"
+            ng-show="ctrl.appService.validCust === true">Search</md-button>
+        <md-button class="head-button" ui-sref="history"
+            ng-show="ctrl.appService.validCust === true">History</md-button>
+      </section>

@@ -1,0 +1,21 @@
+<div class="container" ng-cloak layout-gt-sm="row" layout="column">
+
+  <div flex-gt-sm="100" flex>
+    <md-toolbar layout="row">
+      <div class="md-toolbar-tools">
+        <span>Your Past Itineraries:</span>
+      </div>
+    </md-toolbar>
+
+    <md-list-item class="md-2-line" ng-repeat="details in ctrl.results" ng-click="null">
+      <div class="md-list-item-text" ng-repeat="flight in details" layout="column">
+        <h3>Flight Origin: {{ flight.origin }}</h3>
+        <h3>Flight Destination: {{ flight.destination }}</h3>
+        <p>Flight Takeoff Time: {{ flight.offset }}</p>
+        <p>Flight Duration: {{ flight.flightTime }} hours</p>
+      </div>
+      <div flex></div><md-button class="head-button" ng-click="ctrl.map(details)">Map Flight</md-button>
+      <md-divider ></md-divider>
+    </md-list-item>
+  </div>
+</div>

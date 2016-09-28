@@ -1,4 +1,4 @@
-import templateUrl from './map.component.html'
+import templateUrl from './map.template.html'
 
 /* @ngInject */
 class MapController {
@@ -9,26 +9,26 @@ class MapController {
 
   constructor ($map, locations) {
     this.$map = $map
+    let i = 0
+    const colors = ['#CC0099', '#AA1100', '#FF3388', '#660066', '#CC66ff']
 
-    // add markers from an angular constant
-    const { memphis, nashville, knoxville } = locations
-    const markers = [memphis, nashville, knoxville]
+    // Works with multiple leg flights, though you have to add them
+    // in the database due to other issues.
+    $map.details.forEach(flight => {
+      let origin = $map.nameCheck(flight.origin)
+      let destination = $map.nameCheck(flight.destination)
 
-    markers.forEach(marker => this.addMarker(marker))
-
-    // add paths manually
-    const paths = [
-      [memphis, nashville, '#CC0099'],
-      [nashville, knoxville, '#AA1100']
-    ]
-
-    paths.forEach(args => this.addPath(...args))
-
-    // add path from webservice
-    $map.getMarkerByCityName('Chattanooga')
-      .then(chattanooga => {
-        this.addPath(knoxville, chattanooga, '#FF3388')
-      })
+      $map.getMarkerByCityName(origin)
+        .then(origin => {
+          this.addMarker(origin)
+          $map.getMarkerByCityName(destination)
+            .then(destination => {
+              this.addMarker(destination)
+              this.addPath(origin, destination, colors[ i % 5 ])
+              i++
+            })
+        })
+    })
   }
 
   addMarker ({ latitude, longitude }) {
@@ -42,7 +42,7 @@ class MapController {
       path: `[[${a.latitude}, ${a.longitude}], [${b.latitude}, ${b.longitude}]]`,
       strokeColor: color,
       strokeOpacity: 1.0,
-      strokeWeight: 3,
+      strokeWeight: 2,
       geodesic: true
     })
   }

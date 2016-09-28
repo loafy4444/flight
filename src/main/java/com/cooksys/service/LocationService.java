@@ -11,19 +11,22 @@ import com.cooksys.repository.LocationRepository;
 @Service
 public class LocationService {
 	
+	private final LocationRepository repo;
+	
 	@Autowired
-	LocationRepository repo;
+	public LocationService(LocationRepository repo){
+		this.repo = repo;
+	}
 		
-	public List<Location> getAll()
-	{
-		return repo.findAll();
+	public List<Location> index(){
+		return this.repo.findAll();
 	}
 
-	public Location get(long id) {
-		return repo.findById(id);
+	public Location read(long id){
+		return this.repo.findById(id);
 	}
 	
-	public Location get(String name) {
-		return repo.findByCity(name);
+	public Location read(String name){
+		return this.repo.findByCity(name);
 	}
 }
